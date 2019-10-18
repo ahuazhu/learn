@@ -1,9 +1,9 @@
 package com.obnormal;
 
 public class Student {
-    static int speak(int m)throws MyException{
+    static int speak(int m)throws MyException1{
         if (m>1000){
-            throw new MyException("参数太大了");
+            throw new MyException1("参数太大了");
         }
         return m;
     }
@@ -12,7 +12,7 @@ public class Student {
         try {
             int result=speak(1001);
             System.out.println(result);
-        }catch (MyException e){
+        }catch (MyException1 e){
             e.printStackTrace();
         }
     }
