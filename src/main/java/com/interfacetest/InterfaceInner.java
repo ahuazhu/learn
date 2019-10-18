@@ -22,3 +22,16 @@ class OuterClass2{
         return new InnerClass("访问内部类构造方法");
     }
 }
+interface OutInterface2{
+
+}
+class OuterClass4{
+    public OutInterface2 doit(){
+        return new OutInterface2() {
+            private int i=0;
+            public int getValue(){
+                return i;
+            }
+        };
+    }
+}
