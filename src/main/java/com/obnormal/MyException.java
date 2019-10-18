@@ -3,7 +3,11 @@ package com.obnormal;
 
 
 public class MyException extends Exception {
-    public MyException(String ErrorMessage){
-        super(ErrorMessage);
+    String message;
+    public MyException(String ErrorMessagr){
+        message=ErrorMessagr;
+    }
+    public String getMessage(){
+        return message;
     }
 }
