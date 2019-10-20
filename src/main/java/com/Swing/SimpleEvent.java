@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SimpleEvent extends JFrame {
+public class SimpleEvent extends JFrame implements ActionListener{
     private JButton jb=new JButton("我是按钮，单击我");
     public SimpleEvent(){
         setLayout(null);
@@ -14,14 +14,13 @@ public class SimpleEvent extends JFrame {
         Container container=getContentPane();
         container.add(jb);
         jb.setBounds(10,10,100,30);
-        jb.addActionListener(new jbAction());
+        jb.addActionListener(this);
         setVisible(true);
     }
-    class jbAction implements ActionListener{
+
         public void actionPerformed(ActionEvent arg0){
             jb.setText("我被单击了");
         }
-    }
 
     public static void main(String[] args) {
         new SimpleEvent();
