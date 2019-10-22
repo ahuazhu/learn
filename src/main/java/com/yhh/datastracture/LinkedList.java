@@ -1,6 +1,6 @@
 package com.yhh.datastracture;
 
-import com.obnormal.MyException;
+
 
 class LinkNode{
     private int value;
@@ -65,24 +65,47 @@ public class LinkedList implements List{
                 head=node;
                 node.setNext(p);
                 count++;
-            }else if (index<=count){
-                for (int i = 1; i <index; i++) {
+            }else if (index<count){
+                for (int i = 1; i <index-1; i++) {
                     p=p.getNext();
                     p2=p2.getNext();
+
                 }
                 p.setNext(node);
                 node.setNext(p2);
                 count++;
             }else {
-                throw new MyException("index超出链表长度");
+                throw new Exception("index超出链表长度");
             }
+        }
+    }
+    public void remove(int index){
+        LinkNode p=head;
+        LinkNode p1=p.getNext();
+        LinkNode p2 =p1.getNext();
+            if (count==1){
+            head=null;
+            count--;
+        }else if (index<count){
+                if (index==0){
+                    head=p1;
+                    count--;
+                }else {
+                    for (int i = 1; i < index; i++) {
+                        p=p.getNext();
+                        p1=p1.getNext();
+                        p2=p2.getNext();
+                    }
+                    p.setNext(p2);
+                    count--;
+                }
         }
     }
 
     public static void main(String[] args)  {
         LinkedList list=new LinkedList();
-        System.out.println(list.size());
-        list.print();
+        //System.out.println(list.size());
+        //list.print();
         list.append(33);
         list.append(22);
         list.append(34);
@@ -90,10 +113,13 @@ public class LinkedList implements List{
         System.out.println(list.size());
         list.print();
         try {
-            list.insert(23, 4);
+            list.insert(23, 3);
+            list.print();
         }catch (Exception e){
             System.out.println(e);
         }
+        list.remove(4);
         list.print();
+
     }
 }
