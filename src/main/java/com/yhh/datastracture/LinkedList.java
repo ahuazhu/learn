@@ -1,28 +1,26 @@
 package com.yhh.datastracture;
 
+public class LinkedList<T> implements List<T> {
+    private static class LinkNode<T> {
+        private T value;
+        private LinkNode next;
 
-class LinkNode {
-    private int value;
-    private LinkNode next;
+        public T getValue() {
+            return value;
+        }
 
-    public int getValue() {
-        return value;
+        public void setValue(T value) {
+            this.value = value;
+        }
+
+        public LinkNode getNext() {
+            return next;
+        }
+
+        public void setNext(LinkNode next) {
+            this.next = next;
+        }
     }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    public LinkNode getNext() {
-        return next;
-    }
-
-    public void setNext(LinkNode next) {
-        this.next = next;
-    }
-}
-
-public class LinkedList implements List {
     LinkNode head = null;
     int count = 0;
 
@@ -33,7 +31,7 @@ public class LinkedList implements List {
         list.append(33);
         list.append(22);
         list.append(34);
-        list.append(36);
+        list.append(23);
         System.out.println(list.size());
         list.print();
         try {
@@ -44,31 +42,22 @@ public class LinkedList implements List {
         }
         list.remove(4);
         list.print();
-
-        list.remove(2);
-
-        list.print();
-
-        list.remove(0);
-
-        list.print();
-
-        list.remove(2);
+        LinkedList l2=new LinkedList();
+        l2.append(33);
+        l2.append(22);
+        l2.append(34);
+        l2.append(23);
 
         list.print();
-
-        list.remove(1);
-        list.print();
-
-        list.remove(0);
-        list.print();
-
+        l2.print();
+        System.out.println(list.equals(l2));
+        System.out.println(list.getIndexOf(23));
     }
-
+    //O(1)
     public int size() {
         return count;
     }
-
+    //O(n)
     public void print() {
         LinkNode p = head;
         for (int i = 0; i < count; i++) {
@@ -77,25 +66,24 @@ public class LinkedList implements List {
         }
         System.out.println();
     }
-
-    public void append(int element) {
+    //O(n)
+    public void append(T element) {
         LinkNode node = new LinkNode();
         node.setValue(element);
         if (head == null) {
             head = node;
-            count++;
         } else {
             LinkNode p = head;
             while (p.getNext() != null) {
                 p = p.getNext();
             }
             p.setNext(node);
-            count++;
         }
+        count++;
     }
-
-    public void insert(int element, int index) throws Exception {
-        LinkNode node = new LinkNode();
+    //O(n)
+    public void insert(int index,T element) throws Exception {
+        LinkNode<T> node = new LinkNode<T>();
         node.setValue(element);
         if (head == null) {
             head = node;
@@ -119,7 +107,42 @@ public class LinkedList implements List {
             }
         }
     }
+    public int getIndexOf(T value){
+        LinkNode p=head;
+        int index=0;
+        for (int i = 0; i < count; i++) {
+            if (p.getValue().equals(value)){
+                index=i;
+                break;
+            }else{
+                index=-1;
+            }
+            p=p.getNext();
+        }
+        return index;
+    }
 
+    public T get(int index){
+        LinkNode p=head;
+        for (int i = 0; i < index; i++) {
+            p=p.getNext();
+        }
+        return (T)p.getValue();
+    }
+
+    public T gettail(){
+        return (T)head.getValue();
+    }
+
+    public T gethead(){
+        LinkNode p=head;
+        for (int i = 0; i < count; i++) {
+            p=p.getNext();
+        }
+        return (T)p.getValue();
+    }
+
+    //O(n)
     public void remove(int index) {
         if (count == 1) {
             head = null;
@@ -133,7 +156,6 @@ public class LinkedList implements List {
 
                 for (int i = 0; i < index -1 ; i++) {
                     pre = pre.getNext();
-
                 }
                 LinkNode toRemove = pre.getNext();
                 LinkNode next = toRemove.getNext();
@@ -141,6 +163,27 @@ public class LinkedList implements List {
                 pre.setNext(next);
                 count--;
             }
+        }
+    }
+
+    public boolean equals(LinkedList l2) {
+        LinkedList l1 = this;
+        if (l1.count!=l2.count){
+            return false;
+        }else{
+            LinkNode p1=l1.head;
+            LinkNode p2=l2.head;
+
+            for (int i = 0; i < count; i++) {
+                if (!(p1.getValue().equals(p2.getValue()))){
+                    return false;
+                } else {
+                    p1 = p1.getNext();
+                    p2 = p2.getNext();
+                }
+            }
+
+            return true;
         }
     }
 }
