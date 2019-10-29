@@ -8,7 +8,7 @@ public interface List<T> {
 
     void append(T element);
 
-    void insert(int index, T element) throws Exception;
+    void insert(int index, T element) ;
 /*
 * 删除列表中的第index元素  */
     void remove(int index);

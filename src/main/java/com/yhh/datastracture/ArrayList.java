@@ -65,16 +65,12 @@ public class ArrayList<T> implements List<T> {
     }
     //O(n)
     public int getIndexOf(T value){
-        int s=0;//表示数组的下标
         for (int i = 0; i < count; i++) {
             if (array[i].equals(value)){
-                s=i;
-                break;
-            }else{
-                s=-1;
+               return i;
             }
         }
-        return s;
+        return -1;
     }
     //O(1)
     public T get(int index){
@@ -99,13 +95,11 @@ public class ArrayList<T> implements List<T> {
         return (T) array[0];
     }//O(1)
 
-
-
     public static void main(String[] args) throws Exception {
         ArrayList list = new ArrayList();
         list.append(8);
         list.append(7);
-        list.append("s");
+        list.append(6);
         list.append(3);
         list.append(2);
         System.out.println(list.size());
