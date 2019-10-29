@@ -161,6 +161,35 @@ public class ArrayList implements List {
         return index;
     }
 
+    public void sort(){
+        qSort(array,0,count-1);
+    }
+    private void qSort(int[] array,int low,int high){
+        if (low<high){
+            int pivotkey=array[0];
+            int pivotloc=partition(array,low,high,pivotkey);
+            qSort(array,low,pivotloc);
+            qSort(array,pivotloc+1,high);
+        }
+    }
+    private int partition(int[] array,int low,int high,int pivotkey){
+        while (low!=high){
+            while (low<high&&array[high]>=pivotkey){
+                high--;
+            }
+            swap(array,low,high);
+            while (low<high&&array[low]<=pivotkey){
+                low++;
+            }
+            swap(array,low,high);
+        }
+        return low;
+    }
+    private void swap(int[] array,int i, int j) {
+        int temp=array[i];
+        array[i]=array[j];
+        array[j]=temp;
+    }
     public static void main(String[] args) throws Exception {
         ArrayList list = new ArrayList();
         list.append(3);
@@ -169,7 +198,7 @@ public class ArrayList implements List {
         list.append(4);
         list.append(6);
         list.print();
-        list.insertSort();
+        list.sort();
         list.print();
     }
 
