@@ -48,4 +48,24 @@ public class LinkedListTest {
 
     }
 
+    @Test
+    public void testSort() {
+        LinkedList l = new LinkedList();
+        l.append(3);
+        l.append(2);
+        l.append(1);
+        l.append(5);
+
+        l.insertSort();
+
+        LinkedList expect = new LinkedList();
+        expect.append(1);
+        expect.append(2);
+        expect.append(3);
+        expect.append(5);
+
+        Assert.assertEquals(expect, l);
+
+    }
+
 }

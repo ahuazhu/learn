@@ -42,7 +42,7 @@ public class LinkedList<T extends Comparable> implements List<T> {
         }
         list.remove(4);
         list.print();
-        list.insertSort(list);
+        list.insertSort();
         list.print();
     }
     //O(1)
@@ -180,55 +180,28 @@ public class LinkedList<T extends Comparable> implements List<T> {
         }
     }
 
-    public void insertSort(LinkedList list){
-        for (int i = 1; i < count; i++) {
-            insertElement(i,list);
+    public void insertSort(){
+        for (int i = 0; i < count; i++) {
+            insertElement(i);
         }
     }
 
-    private void insertElement(int i,LinkedList list){
-        int to=findRoom(list,i-1,get(i));
-        T value=get(i);
-        if (get(i-1).compareTo(get(i))>0){
-            moveToNext(list,to,i-1);
+    private void insertElement(int i){
+        T value = get(i);
+        int to=findRoom(i-1, value);
+        if (to < i) {
+            insert(to, value);
+            remove(i + 1);
         }
+
     }
 
-    private int findRoom(LinkedList list,int end,T value){
-        int index=0;
+    private int findRoom(int end, T value){
         for (int i = 0; i <=end; i++) {
-            index=i;
-            if (get(i).compareTo(value)>0){
-                break;
+            if (get(i).compareTo(value) > 0){
+                return i;
             }
         }
-        return index;
-    }
-    private void moveToNext(LinkedList list,int to,int end){
-        if (to==0){
-            LinkNode p1=head.getNext();
-            LinkNode p2= (LinkNode) get(end);
-            LinkNode p3=p2.getNext();
-            p3.setNext(p1);
-            p2.setNext(null);
-            head.setNext(p3);
-        }else if (end+1==count-1){
-            LinkNode p1=(LinkNode) get(to-1);
-            LinkNode p2=p1.getNext();
-            LinkNode p3=(LinkNode)get(end);
-            LinkNode p4=p3.getNext();
-            //LinkNode p5=p4.getNext();
-            p3.setNext(p4.getNext());
-            p1.setNext(p4);
-            p4.setNext(p2);
-        }else{
-            LinkNode p1=(LinkNode) get(to-1);
-            LinkNode p2=p1.getNext();
-            LinkNode p3=(LinkNode)get(end);
-            LinkNode p4=p3.getNext();
-            p4.setNext(p2);
-            p3.setNext(null);
-            p1.setNext(p4);
-        }
+        return end + 1;
     }
 }
