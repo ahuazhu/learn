@@ -34,10 +34,10 @@ public class ArrayQueue<T>  implements Queue<T>  {
     //O(n)
     public T take(){
         T element=(T)array[0];
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count-1; i++) {
             array[i]=array[i+1];
         }
-        System.out.println("取出的元素为："+element);
+        //System.out.println("取出的元素为："+element);
         count--;
         return element;
     }
@@ -52,7 +52,7 @@ public class ArrayQueue<T>  implements Queue<T>  {
         arrayQueue.enqueue(16);
         System.out.println(arrayQueue.size());
         arrayQueue.print();
-        arrayQueue.take();
+        System.out.println(arrayQueue.take());
         arrayQueue.print();
     }
 }
