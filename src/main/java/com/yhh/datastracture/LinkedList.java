@@ -21,8 +21,9 @@ public class LinkedList<T extends Comparable> implements List<T> {
             this.next = next;
         }
     }
-    LinkNode head = null;
+    LinkNode head=null;
     int count = 0;
+
 
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
