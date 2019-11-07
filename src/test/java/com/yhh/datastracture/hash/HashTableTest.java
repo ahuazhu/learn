@@ -17,6 +17,11 @@ public class HashTableTest {
         hashTable.put("李四",60);
         hashTable.put("王五",90);
         hashTable.put("赵六",70);
+        hashTable.put("李乾",68);
+        hashTable.put("小红",72);
+        hashTable.put("孙亮",87);
+        hashTable.print();
+        hashTable.put("小明",93);
         hashTable.print();
         hashTable.remove("王五",90);
         hashTable.print();

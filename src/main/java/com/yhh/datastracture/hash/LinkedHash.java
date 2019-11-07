@@ -37,7 +37,7 @@ public class LinkedHash<K,V> implements List<K,V>{
             return value;
         }
     }
-    private Entry<K,V> head=null;
+    Entry<K,V> head=null;
     int count=0;
 
     public void insert(K key,V value){

@@ -7,7 +7,7 @@ public class HashTable<K,V> {
     public HashTable(){
         entryArray=new LinkedHash[7];
         for (int i = 0; i < entryArray.length; i++) {
-            entryArray[i]= new LinkedHash();
+            entryArray[i]= new LinkedHash<K,V>();
         }
     }
     public int hash(K key){
@@ -24,13 +24,26 @@ public class HashTable<K,V> {
     }
     public void resize(){
         LinkedHash<K,V>[] newEntryArray=new LinkedHash[entryArray.length*2];
+        for (int i = 0; i < newEntryArray.length; i++) {
+            newEntryArray[i]=new LinkedHash<K, V>();
+        }
         for (int i = 0; i < entryArray.length; i++) {
-            newEntryArray[i]=entryArray[i];
+            if (entryArray[i]!=null){
+                LinkedHash<K, V> ord=entryArray[i];
+                LinkedHash.Entry ordNode=ord.head;
+                while (ordNode!=null){
+                    K nextKey= (K) ordNode.getKey();
+                    V nextValue= (V) ordNode.getValue();
+                    newEntryArray[i].insert(nextKey,nextValue);
+                    ordNode=ordNode.getNext();
+                }
+            }
         }
         entryArray=newEntryArray;
     }
+
     public void put(K key,V value){
-        if ((++size/entryArray.length)>LOAD_FACTOR){
+        if ((size/entryArray.length)>LOAD_FACTOR){
             resize();
         }
         int hashCode=hash(key);
