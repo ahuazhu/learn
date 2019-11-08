@@ -22,6 +22,19 @@ public class HashTable<K,V> {
         }
         return hashVal;
     }
+
+    public int newHash(K key,int length){
+        int hashVal=0;
+        String k= (String) key;
+        for (int i = 0; i < k.length(); i++) {
+            hashVal=hashVal*27+k.charAt(i);
+        }
+        hashVal=hashVal%length;
+        if (hashVal<0){
+            hashVal=hashVal+length;
+        }
+        return hashVal;
+    }
     public void resize(){
         LinkedHash<K,V>[] newEntryArray=new LinkedHash[entryArray.length*2];
         for (int i = 0; i < newEntryArray.length; i++) {
@@ -34,7 +47,8 @@ public class HashTable<K,V> {
                 while (ordNode!=null){
                     K nextKey= (K) ordNode.getKey();
                     V nextValue= (V) ordNode.getValue();
-                    newEntryArray[i].insert(nextKey,nextValue);
+                    int hashCode=newHash(nextKey,newEntryArray.length);
+                    newEntryArray[hashCode].insert(nextKey,nextValue);
                     ordNode=ordNode.getNext();
                 }
             }
