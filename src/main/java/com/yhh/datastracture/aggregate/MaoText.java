@@ -18,11 +18,16 @@ public class MaoText {
         Set<String> set=map.keySet();
         Iterator<String> it=set.iterator();
         System.out.println("HashMap类实现的Map集合，无序：");
-        while (it.hasNext()){
-            String str=it.next();
-            String name=map.get(str);
-            System.out.println(str+" "+name);
+//        while (it.hasNext()){
+//            String str=it.next();
+//            String name=map.get(str);
+//            System.out.println(str+" "+name);
+//        }
+
+        for (Map.Entry<String, String> employ : map.entrySet()) {
+            System.out.println(employ.getKey() +" "+ employ.getValue());
         }
+
         TreeMap<String,String> treeMap=new TreeMap<String, String>();
         treeMap.putAll(map);
         Iterator<String> iter=treeMap.keySet().iterator();

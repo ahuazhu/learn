@@ -45,6 +45,7 @@ public class LinkedList<T extends Comparable> implements List<T> {
         list.print();
         list.insertSort();
         list.print();
+        System.out.println(list.contain(32));
     }
     //O(1)
     public int size() {
@@ -109,6 +110,16 @@ public class LinkedList<T extends Comparable> implements List<T> {
             p=p.getNext();
         }
         return -1;
+    }
+    public boolean contain(T value){
+        LinkNode p=head;
+        for (int i = 0; i < count; i++) {
+            if (p.getValue().equals(value)){
+                return true;
+            }
+            p=p.getNext();
+        }
+        return false;
     }
 
     public T get(int index){
